@@ -160,7 +160,7 @@ public:
 
 		//Load Font Character 3
 		writeMemory(15, (uint8_t)0xF0);
-		writeMemory(16, (uint8_t)0x80);
+		writeMemory(16, (uint8_t)0x10);
 		writeMemory(17, (uint8_t)0xF0);
 		writeMemory(18, (uint8_t)0x10);
 		writeMemory(19, (uint8_t)0xF0);
@@ -171,13 +171,6 @@ public:
 		writeMemory(22, (uint8_t)0xF0);
 		writeMemory(23, (uint8_t)0x10);
 		writeMemory(24, (uint8_t)0x10);
-
-		//Load Font Character 0
-		writeMemory(25, (uint8_t)0xF0);
-		writeMemory(26, (uint8_t)0x90);
-		writeMemory(27, (uint8_t)0x90);
-		writeMemory(28, (uint8_t)0x90);
-		writeMemory(29, (uint8_t)0xF0);
 
 		//Load Font Character 5
 		writeMemory(30, (uint8_t)0xF0);
