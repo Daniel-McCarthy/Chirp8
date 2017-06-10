@@ -13,7 +13,6 @@ Window::Window(string title, int width, int height)
 	memset(canvas, 0, 64 * 32 * sizeof(Uint32));
 	sdlGLContext = SDL_GL_CreateContext(sdlWindow);
 	SDL_GL_SetSwapInterval(1); //Enable VSYNC
-	//glClearColor(0, 0, 1, 1);
 }
 
 Window::~Window()
@@ -51,14 +50,12 @@ bool Window::XorPixel(int x, int y)
 	if (canvas[y * 64 + x] == (Uint32)0)
 	{
 		canvas[y * 64 + x] = (Uint32)0xFFFFFFFF;//RGBA
-		//registers[0xF] = 0;
 		return false;
 	}
 	else
 	{
 
 		canvas[y * 64 + x] = (Uint32)0;
-		//registers[0xF] = 1;
 		return true;
 	}
 }
@@ -87,7 +84,7 @@ void Window::DrawSprite(vector<int> spriteData, int x, int y, int n)
 	for (int i = 0; i < height; i++)
 	{
 		
-		string line = Binary::toBinary(spriteData.at(i));//spriteData[i]);
+		string line = Binary::toBinary(spriteData.at(i));
 
 		for (int j = 0; j < (int)line.length(); j++)
 		{
@@ -111,9 +108,9 @@ void Window::DrawSprite(vector<int> spriteData, int x, int y, int n)
 	else
 	{
 		registers[0xF] = 0;
-		SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32)); //TEMPORARY
+		SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32)); //TEMPORARY : Updates only when pixel enabled (Drastically reduces flickering, but has side effects)
 	}
-	//SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32)); //TEMPORARY
+	//SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32)); //TEMPORARY : Updates every draw
 }
 
 void Window::clearScreen()
