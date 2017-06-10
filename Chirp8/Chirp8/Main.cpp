@@ -1,6 +1,5 @@
 
 #include "Main.h"
-#include "Window.h"
 #include "Binary.h"
 #include "Opcode.h"
 #include "Input.h"
@@ -13,16 +12,36 @@ vector<byte> registers = vector<byte>(0xF + 1);
 stack<short> chipStack = stack<short>();
 short I = 0;
 uint8_t delayTimer = 60; //hz
-uint8_t soundTimer = 60; //hz
+uint8_t soundTimer = 0; //hz
 int memoryPointer = 0x200;
 vector<byte> keysDown = vector<byte>(0xF + 1);
+bool run = true;
+
+inline void decrementTimers()
+{
+	while (run)
+	{
+		if (soundTimer > 0)
+			soundTimer--;
+
+		if (delayTimer > 0)
+			delayTimer--;
+
+		if (soundTimer > 0)
+		{
+			//temporary sound
+			//Beep(523, 40);
+			Beep(350, 40);
+		}
+		this_thread::sleep_for(chrono::milliseconds(32));//16));
+	}
+}
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 
 	SDL_SetWindowSize(chipWindow.sdlWindow,640, 320);
 	SDL_ShowWindow(chipWindow.sdlWindow);
-	bool run = true;
 
 	for (int i = 0; i < 0xF+1; i++)
 	{
@@ -33,6 +52,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	chipMemory.loadRom("C://Users//Dan//Desktop//TETRIS.g");
 	//chipMemory.loadRom("C://Users//Dan//Desktop//PONG.g");
+	//chipMemory.loadRom("C://Users//Dan//Desktop//PONGAI.g");
 	//chipMemory.loadRom("C://Users//Dan//Desktop//BRIX.g"); //FX33 issue solved, still have problem with collision. Something wrong with flag? Maybe related to blinking pixels? 
 	//chipMemory.loadRom("C://Users//Dan//Desktop//BLINKY.g"); //DOESN'T WORK AT ALL - Debug, disassemble, find out what's wrong
 	//chipMemory.loadRom("C://Users//Dan//Desktop//INVADERS.g"); //Drawing is messed up, screen blinking solution seems to mess up letters too
@@ -40,7 +60,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	chipMemory.loadFontSprites();
 
 
-
+	thread decrementTimers1(decrementTimers);
 
 
 	SDL_Event event;
@@ -92,20 +112,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		SDL_RenderCopy(chipWindow.sdlRenderer, chipWindow.texture, NULL, NULL);		//Copies Texture to Screen
 		SDL_RenderPresent(chipWindow.sdlRenderer);									//Renders Screen
 
-		SDL_Delay(10);
-
-		if(soundTimer > 0)
-			soundTimer--;
-
-		if(delayTimer > 0)
-			delayTimer--;
-
-		if (soundTimer > 0)
-		{
-			//temporary sound
-			//Beep(523, 40);
-			//Beep(350, 40);
-		}
+		
+		//SDL_Delay(10); //moved into opcodes temporarily to avoid delaying on drawing, in hopes it speeds up tetris raycasting
 
 		//Reset keys
 		/*
@@ -124,6 +132,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 	//delete[] chipWindow.sdlSurface.pixels;
+
 	SDL_DestroyTexture(chipWindow.texture);
 	SDL_DestroyRenderer(chipWindow.sdlRenderer);
 	SDL_DestroyWindow(chipWindow.sdlWindow);
@@ -131,6 +140,5 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	return 0;
 }
-
 
 
