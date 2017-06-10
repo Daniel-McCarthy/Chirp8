@@ -12,6 +12,11 @@ void Opcode::selectOpcode(short opcode)
 {
 	short test = opcode & 0xF000;
 
+	if ((opcode & 0xF000) != 0xd000)
+	{
+		SDL_Delay(1);
+	}
+
 	switch (opcode & 0xF000)
 	{
 	case 0x0000:
@@ -351,30 +356,77 @@ void Opcode::opcode8XY3(int x, int y)
 void Opcode::opcode8XY4(int x, int y)
 {
 	//Set VX += VY
+	if (registers.at(x) + registers.at(y) > 0xFF)
+	{
+		registers.at(0xF) = 1;
+	}
+	else
+	{
+		registers.at(0xF) = 0;
+	}
+
 	registers.at(x) += registers.at(y);
 }
 
 void Opcode::opcode8XY5(int x, int y)
 {
 	//Set VX -= VY
+	if (registers.at(x) > registers.at(y))
+	{
+		registers.at(0xF) = 1;
+	}
+	else
+	{
+		registers.at(0xF) = 0;
+	}
+
 	registers.at(x) -= registers.at(y);
 }
 
 void Opcode::opcode8XY6(int x)
 {
 	//Set VX >>= 1
+	if ((registers.at(x) & 1) == 1)
+	{
+		registers.at(0xF) = 1;
+	}
+	else
+	{
+		registers.at(0xF) = 0;
+	}
+
 	registers.at(x) >>= 1;
 }
 
 void Opcode::opcode8XY7(int x, int y)
 {
 	//Set VX = VY - VX
+	if (registers.at(y) > registers.at(x))
+	{
+		registers.at(0xF) = 1;
+	}
+	else
+	{
+		registers.at(0xF) = 0;
+	}
+
+	registers.at(x) -= registers.at(y);
+
 	registers.at(x) = registers.at(y) - registers.at(x);
 }
 
 void Opcode::opcode8XYE(int x)
 {
 	//Set VX <<= 1
+	if ((registers.at(x) & 1) == 1)
+	{
+		registers.at(0xF) = 1;
+	}
+	else
+	{
+		registers.at(0xF) = 0;
+	}
+
 	registers.at(x) <<= 1;
 }
 
@@ -482,7 +534,7 @@ void Opcode::opcodeFX1E(int x)
 void Opcode::opcodeFX29(int x)
 {
 	//Set I to position in memory of X Font Character
-	I = x * 5;
+	I = registers.at(x) * 5;
 }
 
 void Opcode::opcodeFX33(int x)
@@ -491,8 +543,10 @@ void Opcode::opcodeFX33(int x)
 
 	string number;
 	stringstream ss;
-	ss << x;
+	ss << registers.at(x);
 	ss >> number;
+	number = to_string(registers.at(x));
+	std::reverse(number.begin(), number.end());
 
 	if (number.length() < 3)
 	{
@@ -508,20 +562,23 @@ void Opcode::opcodeFX33(int x)
 		
 	}
 
-	chipMemory.writeMemory(I, (byte)number[0]);
-	chipMemory.writeMemory(I + 1, (byte)number[1]);
-	chipMemory.writeMemory(I + 2, (byte)number[2]);
+	//chipMemory.writeMemory(I, (byte)number[0]);
+	//chipMemory.writeMemory(I + 1, (byte)number[1]);
+	//chipMemory.writeMemory(I + 2, (byte)number[2]);
 
-
+	chipMemory.writeMemory(I, (byte)(number[0] - '0')); //-'0' sets char value to correct numeric value
+	chipMemory.writeMemory(I + 1, (byte)(number[1] - '0'));
+	chipMemory.writeMemory(I + 2, (byte)(number[2] - '0'));
 }
 
 void Opcode::opcodeFX55(int x)
 {
 	//stores data from registers V0 to VX in memory at address I
 
-	for (int i = 0; i < x; i++)
+	for (int i = 0; i <= x; i++)
 	{	
-		chipMemory.writeMemory(I + (2 * i), registers[i]);
+		//chipMemory.writeMemory(I + (2 * i), registers[i]);
+		chipMemory.writeMemory(I + i, registers[i]);
 	}
 
 }
@@ -529,9 +586,10 @@ void Opcode::opcodeFX55(int x)
 void Opcode::opcodeFX65(int x)
 {
 	//copies data from memory at address I into registers V0 to VX
-	for (int i = 0; i < x; i++)
+	for (int i = 0; i <= x; i++)
 	{
-		registers[i] = (( chipMemory.readMemory(I + (2 * i)) << 4 ) | ( chipMemory.readMemory(I + 1 + (2 * i)) ));
+		//registers[i] = (( chipMemory.readMemory(I + (2 * i)) << 4 ) | ( chipMemory.readMemory(I + 1 + (2 * i)) ));
+		registers[i] = chipMemory.readMemory(I + i);
 	}
 
 }

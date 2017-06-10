@@ -7,6 +7,7 @@
 #include <random>
 #include <stack>
 #include <vector>
+#include <iostream>
 
 
 using namespace std;
