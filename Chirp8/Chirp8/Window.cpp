@@ -116,5 +116,5 @@ void Window::DrawSprite(vector<int> spriteData, int x, int y, int n)
 void Window::clearScreen()
 {
 	memset(canvas, 0, 64 * 32 * sizeof(Uint32));
-	SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32)); //TEMPORARY
+	SDL_UpdateTexture(texture, NULL, canvas, 64 * sizeof(Uint32));
 }

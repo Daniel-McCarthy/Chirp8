@@ -471,7 +471,7 @@ void Opcode::opcodeEX9E(int x)
 	if (keysDown.at(registers[x]) == 1)
 	{
 		memoryPointer += 2;
-		keysDown.at(registers[x]) = 0;//expirimental
+		keysDown.at(registers[x]) = 0;
 	}
 
 }
@@ -483,7 +483,7 @@ void Opcode::opcodeEXA1(int x)
 	if (keysDown.at(registers[x]) == 0)
 	{
 		memoryPointer += 2;
-		keysDown.at(registers[x]) = 0;//expirimental
+		keysDown.at(registers[x]) = 0;
 	}
 }
 
@@ -562,10 +562,6 @@ void Opcode::opcodeFX33(int x)
 		
 	}
 
-	//chipMemory.writeMemory(I, (byte)number[0]);
-	//chipMemory.writeMemory(I + 1, (byte)number[1]);
-	//chipMemory.writeMemory(I + 2, (byte)number[2]);
-
 	chipMemory.writeMemory(I, (byte)(number[0] - '0')); //-'0' sets char value to correct numeric value
 	chipMemory.writeMemory(I + 1, (byte)(number[1] - '0'));
 	chipMemory.writeMemory(I + 2, (byte)(number[2] - '0'));
@@ -577,7 +573,6 @@ void Opcode::opcodeFX55(int x)
 
 	for (int i = 0; i <= x; i++)
 	{	
-		//chipMemory.writeMemory(I + (2 * i), registers[i]);
 		chipMemory.writeMemory(I + i, registers[i]);
 	}
 
@@ -588,7 +583,6 @@ void Opcode::opcodeFX65(int x)
 	//copies data from memory at address I into registers V0 to VX
 	for (int i = 0; i <= x; i++)
 	{
-		//registers[i] = (( chipMemory.readMemory(I + (2 * i)) << 4 ) | ( chipMemory.readMemory(I + 1 + (2 * i)) ));
 		registers[i] = chipMemory.readMemory(I + i);
 	}
 

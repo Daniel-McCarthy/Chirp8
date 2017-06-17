@@ -29,8 +29,6 @@ inline void decrementTimers()
 
 		if (soundTimer > 0)
 		{
-			//temporary sound
-			//Beep(523, 40);
 			Beep(350, 40);
 		}
 		this_thread::sleep_for(chrono::milliseconds(32));//16));
@@ -111,27 +109,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		SDL_RenderClear(chipWindow.sdlRenderer);									//Clears Screen
 		SDL_RenderCopy(chipWindow.sdlRenderer, chipWindow.texture, NULL, NULL);		//Copies Texture to Screen
 		SDL_RenderPresent(chipWindow.sdlRenderer);									//Renders Screen
-
-		
-		//SDL_Delay(10); //moved into opcodes temporarily to avoid delaying on drawing, in hopes it speeds up tetris raycasting
-
-		//Reset keys
-		/*
-		for (int i = 0; i < 16; i++)
-		{
-			if (keysDown[i] == 1)
-				OutputDebugStringA("Key Down ");//:" + i);
-		}
-		*/
-		/*
-		for (int i = 0; i < 16; i++)
-		{
-			keysDown[i] = 0;
-		}
-		*/
 	}
-
-	//delete[] chipWindow.sdlSurface.pixels;
 
 	SDL_DestroyTexture(chipWindow.texture);
 	SDL_DestroyRenderer(chipWindow.sdlRenderer);

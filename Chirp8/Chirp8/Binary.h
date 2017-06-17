@@ -38,19 +38,6 @@ public:
 
 		return binary;
 	}
-	/*
-	static string toBinary(int number)
-	{
-		string binary = "";
 
-		for (int i = 31; i > -1; i--)
-		{
-			binary += to_string(getBit(number, i));
-
-		}
-
-		return binary;
-	}
-	*/
 };
 
