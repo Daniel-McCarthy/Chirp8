@@ -454,7 +454,6 @@ void Opcode::opcodeBNNN(int nnn)
 void Opcode:: opcodeCXNN(int x, int nn)
 {
 	//Set VX = rand() & NN
-	int randNum = rand();
 	registers.at(x) = rand() & nn;
 }
 

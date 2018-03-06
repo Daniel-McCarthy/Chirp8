@@ -60,6 +60,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	thread decrementTimers1(decrementTimers);
 
+	srand(time(NULL)); //Seed random function
 
 	SDL_Event event;
 	while (run)
