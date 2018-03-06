@@ -51,9 +51,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	chipMemory.loadRom("C://Users//Dan//Desktop//TETRIS.g");
 	//chipMemory.loadRom("C://Users//Dan//Desktop//PONG.g");
 	//chipMemory.loadRom("C://Users//Dan//Desktop//PONGAI.g");
-	//chipMemory.loadRom("C://Users//Dan//Desktop//BRIX.g"); //FX33 issue solved, still have problem with collision. Something wrong with flag? Maybe related to blinking pixels? 
-	//chipMemory.loadRom("C://Users//Dan//Desktop//BLINKY.g"); //DOESN'T WORK AT ALL - Debug, disassemble, find out what's wrong
-	//chipMemory.loadRom("C://Users//Dan//Desktop//INVADERS.g"); //Drawing is messed up, screen blinking solution seems to mess up letters too
+	//chipMemory.loadRom("C://Users//Dan//Desktop//BRIX.g");
+	//chipMemory.loadRom("C://Users//Dan//Desktop//BLINKY.g");
+	//chipMemory.loadRom("C://Users//Dan//Desktop//INVADERS.g");
 	//chipMemory.loadRom("C://Users//Dan//Desktop//MAZE.g");
 	chipMemory.loadFontSprites();
 
