@@ -150,7 +150,7 @@ void Opcode::selectOpcode(short opcode)
 	case 0x9000:
 	{
 		//Conditional opcode skip (if VX != VY)
-		opcode9XYN((opcode & 0x0F00) >> 8, (opcode & 0x00F0) >> 4);
+		opcode9XY0((opcode & 0x0F00) >> 8, (opcode & 0x00F0) >> 4);
 		break;
 	}
 	case 0xA000:
@@ -271,6 +271,7 @@ void Opcode::opcode00E0()
 void Opcode::opcode00EE()
 {
 	//Return from subroutine
+	//Set memory pointer to address at top of stack, then pop
 	memoryPointer = chipStack.top();
 	chipStack.pop();
 }
@@ -470,7 +471,7 @@ void Opcode::opcodeEX9E(int x)
 	if (keysDown.at(registers[x]) == 1)
 	{
 		memoryPointer += 2;
-		keysDown.at(registers[x]) = 0;
+		keysDown.at(registers[x]) = 0; //This is a design choice to avoid repeating keys
 	}
 
 }
@@ -482,7 +483,7 @@ void Opcode::opcodeEXA1(int x)
 	if (keysDown.at(registers[x]) == 0)
 	{
 		memoryPointer += 2;
-		keysDown.at(registers[x]) = 0;
+		keysDown.at(registers[x]) = 0; //This is a design choice to avoid repeating keys
 	}
 }
 
@@ -533,6 +534,9 @@ void Opcode::opcodeFX1E(int x)
 void Opcode::opcodeFX29(int x)
 {
 	//Set I to position in memory of X Font Character
+	//The font is being stored at the start of the memory
+	//Each character is 5 bytes, so x*5 will index the correct
+	//font character
 	I = registers.at(x) * 5;
 }
 
