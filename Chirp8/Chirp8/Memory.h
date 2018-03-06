@@ -173,81 +173,81 @@ public:
 		writeMemory(24, (uint8_t)0x10);
 
 		//Load Font Character 5
+		writeMemory(25, (uint8_t)0xF0);
+		writeMemory(26, (uint8_t)0x80);
+		writeMemory(27, (uint8_t)0xF0);
+		writeMemory(28, (uint8_t)0x10);
+		writeMemory(29, (uint8_t)0xF0);
+
+		//Load Font Character 6
 		writeMemory(30, (uint8_t)0xF0);
 		writeMemory(31, (uint8_t)0x80);
 		writeMemory(32, (uint8_t)0xF0);
-		writeMemory(33, (uint8_t)0x10);
+		writeMemory(33, (uint8_t)0x90);
 		writeMemory(34, (uint8_t)0xF0);
 
-		//Load Font Character 6
-		writeMemory(35, (uint8_t)0xF0);
-		writeMemory(36, (uint8_t)0x80);
-		writeMemory(37, (uint8_t)0xF0);
-		writeMemory(38, (uint8_t)0x90);
-		writeMemory(39, (uint8_t)0xF0);
-
 		//Load Font Character 7
-		writeMemory(40, (uint8_t)0xF0);
-		writeMemory(41, (uint8_t)0x10);
-		writeMemory(42, (uint8_t)0x20);
-		writeMemory(43, (uint8_t)0x40);
-		writeMemory(44, (uint8_t)0x40);
+		writeMemory(35, (uint8_t)0xF0);
+		writeMemory(36, (uint8_t)0x10);
+		writeMemory(37, (uint8_t)0x20);
+		writeMemory(38, (uint8_t)0x40);
+		writeMemory(39, (uint8_t)0x40);
 
 		//Load Font Character 8
+		writeMemory(40, (uint8_t)0xF0);
+		writeMemory(41, (uint8_t)0x90);
+		writeMemory(42, (uint8_t)0xF0);
+		writeMemory(43, (uint8_t)0x90);
+		writeMemory(44, (uint8_t)0xF0);
+
+		//Load Font Character 9
 		writeMemory(45, (uint8_t)0xF0);
 		writeMemory(46, (uint8_t)0x90);
 		writeMemory(47, (uint8_t)0xF0);
-		writeMemory(48, (uint8_t)0x90);
+		writeMemory(48, (uint8_t)0x10);
 		writeMemory(49, (uint8_t)0xF0);
 
-		//Load Font Character 9
+		//Load Font Character A
 		writeMemory(50, (uint8_t)0xF0);
 		writeMemory(51, (uint8_t)0x90);
 		writeMemory(52, (uint8_t)0xF0);
-		writeMemory(53, (uint8_t)0x10);
-		writeMemory(54, (uint8_t)0xF0);
-
-		//Load Font Character A
-		writeMemory(55, (uint8_t)0xF0);
-		writeMemory(56, (uint8_t)0x90);
-		writeMemory(57, (uint8_t)0xF0);
-		writeMemory(58, (uint8_t)0x90);
-		writeMemory(59, (uint8_t)0x90);
+		writeMemory(53, (uint8_t)0x90);
+		writeMemory(54, (uint8_t)0x90);
 
 		//Load Font Character B
-		writeMemory(60, (uint8_t)0xE0);
-		writeMemory(61, (uint8_t)0x90);
-		writeMemory(62, (uint8_t)0xE0);
-		writeMemory(63, (uint8_t)0x90);
-		writeMemory(64, (uint8_t)0xE0);
+		writeMemory(55, (uint8_t)0xE0);
+		writeMemory(56, (uint8_t)0x90);
+		writeMemory(57, (uint8_t)0xE0);
+		writeMemory(58, (uint8_t)0x90);
+		writeMemory(59, (uint8_t)0xE0);
 
 		//Load Font Character C
-		writeMemory(65, (uint8_t)0xF0);
-		writeMemory(66, (uint8_t)0x80);
-		writeMemory(67, (uint8_t)0x80);
-		writeMemory(68, (uint8_t)0x80);
-		writeMemory(69, (uint8_t)0xF0);
+		writeMemory(60, (uint8_t)0xF0);
+		writeMemory(61, (uint8_t)0x80);
+		writeMemory(62, (uint8_t)0x80);
+		writeMemory(63, (uint8_t)0x80);
+		writeMemory(64, (uint8_t)0xF0);
 
 		//Load Font Character D
-		writeMemory(70, (uint8_t)0xE0);
-		writeMemory(71, (uint8_t)0x90);
-		writeMemory(72, (uint8_t)0x90);
-		writeMemory(73, (uint8_t)0x90);
-		writeMemory(74, (uint8_t)0xE0);
+		writeMemory(65, (uint8_t)0xE0);
+		writeMemory(66, (uint8_t)0x90);
+		writeMemory(67, (uint8_t)0x90);
+		writeMemory(68, (uint8_t)0x90);
+		writeMemory(69, (uint8_t)0xE0);
 
 		//Load Font Character E
+		writeMemory(70, (uint8_t)0xF0);
+		writeMemory(71, (uint8_t)0x80);
+		writeMemory(72, (uint8_t)0xF0);
+		writeMemory(73, (uint8_t)0x80);
+		writeMemory(74, (uint8_t)0xF0);
+
+		//Load Font Character F
 		writeMemory(75, (uint8_t)0xF0);
 		writeMemory(76, (uint8_t)0x80);
 		writeMemory(77, (uint8_t)0xF0);
 		writeMemory(78, (uint8_t)0x80);
-		writeMemory(79, (uint8_t)0xF0);
-
-		//Load Font Character F
-		writeMemory(80, (uint8_t)0xF0);
-		writeMemory(81, (uint8_t)0x80);
-		writeMemory(82, (uint8_t)0xF0);
-		writeMemory(83, (uint8_t)0x80);
-		writeMemory(84, (uint8_t)0x80);
+		writeMemory(79, (uint8_t)0x80);
 
 	}
 
