@@ -411,8 +411,6 @@ void Opcode::opcode8XY7(int x, int y)
 		registers.at(0xF) = 0;
 	}
 
-	registers.at(x) -= registers.at(y);
-
 	registers.at(x) = registers.at(y) - registers.at(x);
 }
 
