@@ -541,30 +541,10 @@ void Opcode::opcodeFX33(int x)
 {
 	//Stores decimal representation of VX at I
 
-	string number;
-	stringstream ss;
-	ss << registers.at(x);
-	ss >> number;
-	number = to_string(registers.at(x));
-	std::reverse(number.begin(), number.end());
+	chipMemory.writeMemory(I, (byte)(registers.at(x) / 100));
+	chipMemory.writeMemory(I + 1, (byte)((registers.at(x) / 10) % 10));
+	chipMemory.writeMemory(I + 2, (byte)(registers.at(x)  % 10));
 
-	if (number.length() < 3)
-	{
-		int extendNumberLength = 3 - (int)number.length();
-		string newString = "";
-
-		for (int i = 0; i < extendNumberLength; i++)
-		{
-			newString += '0';
-		}
-
-		number = newString + number;
-		
-	}
-
-	chipMemory.writeMemory(I, (byte)(number[0] - '0')); //-'0' sets char value to correct numeric value
-	chipMemory.writeMemory(I + 1, (byte)(number[1] - '0'));
-	chipMemory.writeMemory(I + 2, (byte)(number[2] - '0'));
 }
 
 void Opcode::opcodeFX55(int x)
