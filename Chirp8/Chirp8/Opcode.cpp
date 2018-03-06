@@ -418,7 +418,7 @@ void Opcode::opcode8XY7(int x, int y)
 void Opcode::opcode8XYE(int x)
 {
 	//Set VX <<= 1
-	if ((registers.at(x) & 1) == 1)
+	if (((registers.at(x) & 0x80) >> 7) == 1)
 	{
 		registers.at(0xF) = 1;
 	}
