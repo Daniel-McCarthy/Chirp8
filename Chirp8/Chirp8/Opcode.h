@@ -62,7 +62,7 @@ public:
 
 	void opcode8XYE(int x);
 
-	void opcode9XYN(int x, int y);
+	void opcode9XY0(int x, int y);
 
 	void opcodeANNN(int nnn);
 

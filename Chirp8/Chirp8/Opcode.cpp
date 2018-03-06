@@ -430,7 +430,7 @@ void Opcode::opcode8XYE(int x)
 	registers.at(x) <<= 1;
 }
 
-void Opcode::opcode9XYN(int x, int y)
+void Opcode::opcode9XY0(int x, int y)
 {
 	//Conditional opcode skip (if VX != VY)
 	if (registers[x] != registers[y])
